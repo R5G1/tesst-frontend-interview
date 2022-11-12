@@ -1,10 +1,10 @@
 #Table-Single-Page-Application
 
-#link: https://r5g1-test-single-page-application.netlify.app/
+#link: https://r5g1-table-single-page-application.netlify.app/
 
-#us: HTML, SCSS, SCSS-module, React, TypeScript, Webpack
+#us: HTML, SCSS, SCSS-module, React, Webpack
 
-![Screenshot 2022-09-25 115005](https://user-images.githubusercontent.com/71373383/192135714-20d419ec-eeba-41f5-bfac-f3085e6e0d9e.png)
+![Capture](https://user-images.githubusercontent.com/71373383/201484024-64784e9f-0ea3-4e35-8d96-b7534dd6033f.PNG)
 
 # Getting Started with Create React App
 
