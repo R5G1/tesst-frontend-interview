@@ -1,48 +1,62 @@
 import axios from 'axios';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { IArray } from '../../components/type/type';
-import { getPagesArray, getPagesCount } from '../../components/utils/pages';
+import { getPagesCount } from '../../components/utils/pages';
 import style from './index.module.scss';
-import ShowArray from './mainComponents/showArray';
+import { IArray } from '../../components/type/type';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function Main() {
-  const [post, setPost] = useState<IArray[]>([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-
-  async function fatchPosts() {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-      params: { _limit: limit, _page: page },
-    });
-    setPost(response.data);
-    const xTotalCount = Number(response.headers['x-total-count']);
-    setTotalCount(getPagesCount(xTotalCount, limit));
+  const { register, handleSubmit } = useForm<IArray>();
+  const [array, setArray] = useState<any>([]);
+  const [arrayResult, setArrayResult] = useState<any>([]);
+  const [status, setStatus] = useState(false);
+  async function fatchPut() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'PUT',
+      body: JSON.stringify({
+        array,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => setArrayResult(json))
+      .then(() => setStatus(true))
+      .catch(() => setStatus(false));
   }
-
-  function clikPage(params: number) {
-    setPage(params);
-  }
-
   useEffect(() => {
-    fatchPosts();
-  }, [page]);
+    fatchPut();
+  }, [array]);
+
+  const onSubmit: SubmitHandler<IArray> = (data: IArray, event: any) => {
+    setArray(data);
+    event.target.reset();
+  };
 
   return (
     <div className={style.main}>
       <div className={style.mainConteiner}>
-        <ShowArray post={post} />
-      </div>
-      <div className={style.mainConteinerPages}>
-        {getPagesArray(totalCount).map((item) => (
-          <button
-            onClick={() => clikPage(item)}
-            className={page === item ? style.mainConteinerPBtnActive : style.mainConteinerPBtn}
-            key={item}
-          >
-            {item}
+        <form className={style.mainCForm} onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className={style.mainCInput}
+            placeholder="Ваш номер..."
+            minLength={1}
+            type="tel"
+            {...register('tel')}
+            required
+          />
+          <button className={style.mainCBtn} type="submit">
+            <p>Заказать</p>
           </button>
-        ))}
+        </form>
+        <FontAwesomeIcon icon={solid('user-secret')} style={{ marginTop: '20px' }} />
+        <FontAwesomeIcon icon={solid('coffee')} />
+        <p className={style.mainCP}>
+          {status ? `результат выполнения запроса ${JSON.stringify(arrayResult.array)} ` : ''}
+        </p>
       </div>
     </div>
   );

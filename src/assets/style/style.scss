@@ -3,11 +3,14 @@
 @import "_null.scss";
 
 :root {
+    --main-rotate-minus: -55deg;
+    --main-rotate-plus: 55deg;
+    --main-rotate-zero: 0;
     --main-color-d: rgb(59, 55, 55);
     --main-color-w: rgb(255, 255, 255);
     --main-color-o: rgb(0, 0, 0, 0);
-    --main-color-m: rgb(87, 47, 47);
-    --main-color-mh: rgb(141, 6, 6);
+    --main-color-m: rgb(158, 5, 5);
+    --main-color-mh: rgb(255, 0, 0);
     --bg-color-o1: rgba(0, 0, 0, 0.1);
     --front-w3: 300;
     --front-w5: 500;
@@ -24,34 +27,29 @@ body {
 }
 
 
-.app {
+.app {}
 
-}
+.conteiner {}
 
-.conteiner {
-
-}
-
-button,input,select {
+button,
+input,
+select {
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--main-color-w);
-    background-color: var(--main-color-m);
-    border: 2px solid var(--main-color-w);
+    background-color: var(--main-color-o);
+
     width: 100%;
     min-width: 250px;
     padding: 5px;
     height: 40px;
     transition: background-color 0.3s ease 0s;
-    border-radius: 10px;
     font-size: 18px;
 
-    &:hover {
-        background-color: var(--main-color-mh);
-    }
+    
 
-    @media (max-width:420px) {
+    @media (max-width:768px) {
         min-width: 50px;
     }
 }

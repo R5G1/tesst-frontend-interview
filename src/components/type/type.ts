@@ -1,6 +1,7 @@
 export interface IArray {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+  tel?: number;
+}
+
+export interface IFormInputOrder {
+  tel?: number;
 }
