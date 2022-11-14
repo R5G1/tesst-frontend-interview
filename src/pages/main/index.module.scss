@@ -37,10 +37,11 @@
 
 .mainCInput {
     transform: skew(var(--main-rotate-plus));
+    color: var(--main-color-d);
 
     &:focus {
         text-decoration: underline;
-        color: #000;
+        color: var(--main-color-d);
     }
 
 }
@@ -56,6 +57,9 @@
 
     p {
         transform: skew(var(--main-rotate-plus));
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         @media (max-width:768px) {
             transform: skew(var(--main-rotate-zero));
@@ -65,6 +69,11 @@
 
 }
 
-.mainCP{
+.mainCPErrorMessage {
+    margin: 20px 0px 0px;
+    color: var(--main-color-mh);
+}
+
+.mainCP {
     margin-top: 30px;
 }

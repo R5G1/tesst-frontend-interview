@@ -8,7 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function Main() {
-  const { register, handleSubmit } = useForm<IArray>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IArray>();
   const [array, setArray] = useState<any>([]);
   const [arrayResult, setArrayResult] = useState<any>([]);
   const [status, setStatus] = useState(false);
@@ -43,19 +47,22 @@ function Main() {
           <input
             className={style.mainCInput}
             placeholder="Ваш номер..."
-            minLength={1}
+            minLength={7}
             type="tel"
-            {...register('tel')}
+            {...register('tel', { required: true, pattern: /^[0-9]+$/ })}
             required
           />
+
           <button className={style.mainCBtn} type="submit">
-            <p>Заказать</p>
+            <p>
+              <FontAwesomeIcon icon={solid('user-secret')} style={{ marginRight: '20px' }} />
+              Заказать
+            </p>
           </button>
         </form>
-        <FontAwesomeIcon icon={solid('user-secret')} style={{ marginTop: '20px' }} />
-        <FontAwesomeIcon icon={solid('coffee')} />
+        {errors['tel'] && <p className={style.mainCPErrorMessage}>Только числа</p>}
         <p className={style.mainCP}>
-          {status ? `результат выполнения запроса ${JSON.stringify(arrayResult.array)} ` : ''}
+          {status ? `результат выполнения запроса ${JSON.stringify(arrayResult.array)} ` : 'Ошибка'}
         </p>
       </div>
     </div>
