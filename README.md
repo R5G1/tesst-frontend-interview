@@ -4,7 +4,7 @@
 
 #us: HTML, SCSS, SCSS-module, React, Webpack
 
-Capture.PNG
+![Capture](https://user-images.githubusercontent.com/71373383/201597577-f2d61956-c69a-48e0-811c-893aed0341fc.PNG)
 
 # Getting Started with Create React App
 
